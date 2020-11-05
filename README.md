@@ -4,10 +4,16 @@
 
 16 bit ALU coded for Alchitry Au FPGA
 
-**Au_top**: connects the external inputs (the dipswitch and buttons) to the internal submodule circuits (the ALU and its subcomponents) and displays the output of the ALU using the 7 segments and leds. 
+**au_top**: connects the external inputs (the dipswitch and buttons) to the internal submodule circuits (the ALU and its subcomponents) and displays the output of the ALU using the 7 segments and LEDs. 
 Has an additional function to force the MSB of our internal ALU results to be 1 to show our circuit can check for errors.
 
-**tester**:  the FSM that controls the states of the FPGA (which ALUFN is currently active, loading A and B, self test state) and checks if the output of our internal circuit is correct.
+**tester**:  the FSM that controls the states of the FPGA (which ALUFN is currently active, loading A and B, self test state) and checks if the output of our internal circuit is correct. Provides the input to the alu
+
+**alu_16**: The ALU module that connects to its other submodules adder, boolean, compare, shifter and mx16x16 (multiplier) 
+
+**testtbl**: contains the test cases to self test the ALU circuit
+
+**disp7seg** and **disp7seg_top**: contains the code to display values on the 7segment LEDs
 
 ## How to use:
 
