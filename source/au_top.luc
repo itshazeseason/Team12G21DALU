@@ -1,0 +1,81 @@
+module au_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led [8],         // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+    output io_led [3][8],   // LEDs on IO Shield
+    output io_seg [8],      // 7-segment LEDs on IO Shield
+    output io_sel [4],      // Digit select on IO Shield
+    input io_button [5],    // 5 buttons on IO Shield
+    input io_dip [3][8]     // DIP switches on IO Shield
+  ) {
+  
+//  var i;
+  
+  sig rst;                  // reset signal
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    reset_conditioner reset_cond;
+    
+    .rst(rst) {
+      //multi_seven_seg seg;
+      //multi_dec_ctr dec_ctr;
+    }
+  }
+
+  button_conditioner button[5](.clk(clk));
+  edge_detector button_edge[5] (#RISE(1), #FALL(0), .clk(clk)) ;
+
+  tester tester( .clk(clk), .rst(rst));
+  alu_16 alu;
+  
+  
+  
+  always {
+    reset_cond.in = ~rst_n;   // input raw inverted reset signal
+    rst = reset_cond.out;     // conditioned reset
+    
+    led = c{3b0, io_button};  // connect buttons to LEDs
+    usb_tx = usb_rx;          // loop serial port
+    io_led = 3x{{8h00}};
+    io_seg = 8hff;          // turn segments off
+    io_sel = 4hf;           // select no digits    
+
+    button.in = io_button;
+    button_edge.in = button.out;      //triggers  
+
+    // connect alchitry io button to tester    
+    tester.trigA = button_edge.out[3];
+    tester.trigB = button_edge.out[4];
+    tester.trigExe = button_edge.out[1]; 
+    tester.trigSel = button_edge.out[0];
+    tester.trigTest = button_edge.out[2];
+    tester.dipsw = c{io_dip[1], io_dip[0]};
+    
+    // display logic is reversed
+    io_seg[6:0] = ~tester.seg;       // connect segments 
+    io_sel = ~tester.sel;       // connect digit select 
+
+    // connect alu
+    alu.a = tester.alu_a;
+    alu.b = tester.alu_b;
+    alu.alufn = tester.alu_fn;
+    // connect alu result to tester
+    tester.alu_result = alu.out;
+    tester.alu_check = alu.out;  // use the same circuit output, output will not be affected
+        
+    io_led[2][5:0] = tester.led_alufn;
+    io_led[1] = tester.led[15:8];
+    io_led[0] = tester.led[7:0];
+
+    //Error inducing circuit
+    io_seg[7] =  ~io_dip[2][7];              //for visual indication, decimal point turns up
+    if (io_dip[2][7]) {                      //if activated
+      tester.alu_result[15] = 1;             // force alu_result MSB to 1
+    }
+  }
+
+}

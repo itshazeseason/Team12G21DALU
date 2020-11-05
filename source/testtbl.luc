@@ -1,0 +1,51 @@
+module testtbl (
+    input step[8],      //access 
+    output vec[38]      //test vector: alufn[6],a[16],b[16]
+  ) {
+
+  //opcode
+  const ADD = 6h00;      // 6b000000 ADD
+  const SUB = 6h01;      // 6b000001 SUB
+  const MUL = 6h02;      // 6b000010 MUL
+  const AND = 6h18;      // 6b011000 AND
+  const OR  = 6h1E;      // 6b011110 OR
+  const XOR = 6h16;      // 6b010110 XOR
+  const _A_ = 6h1A;      // 6b011010 "A"
+  const _B_ = 6h1C;      // 6b011100 "B"
+  const BCA = 6h12;      // 6b010010 use B to clear A
+  const ACB = 6h14;      // 6b010100 use A to clear B
+  const SHL = 6h20;      // 6b100000 shift left
+  const SHR = 6h21;      // 6b100001 shift right
+  const SRA = 6h23;      // 6b100011 shift right with signed
+  const ROL = 6h24;      // 6b110100 rotate left
+  const ROR = 6h25;      // 6b110101 rotate right
+  const RVA = 6h27;      // 6b110101 Mirror/Flip A
+  const CMPEQ = 6h33;    // 6b110011 compare equal
+  const CMPLT = 6h35;    // 6b110101 compare less than 
+  const CMPLE = 6h37;    // 6b110111 compare less than or equal
+  const START = 6h00;
+  const END = 6h3F;
+  
+  
+  // Code normally reads bottom to top so use $reverse so you can write
+  // standard top to bottom
+  const TESTSTEP = $reverse( {
+    c{ START, 16b0, 16b0},        // opcode/mode, A, B
+    c{ ADD, 16h0002, 16h000A},    // 16h0002 + 16h00A = 16h000C Test add no overflow
+    c{ ADD, 16h0FFF, 16h0002},    // 16h0FFF + 16h0002 = 16h1001 Test add with overflow
+    c{ SUB, 16h0050, 16h0010},    // 16h0050 - 16h0010 = 16h0040 Test sub no overflow
+    c{ SUB, 16h8001, 16h0002},    // 16h8001 - 16h0002 = 16h0040 Test sub with overflow
+    c{ MUL, 16h0010, 16h0101},    // 16h0010 x 16h0101 = 16h1010 Test MUL no overflow
+    c{ MUL, 16h0FFF, 16h0002},    // 16h0FFF x 16h0002 = 16h1FFE Test Mul with overflow
+    c{ AND, 16h0101, 16h0101},    // 16h0101 AND 16h0101 = 16h0001 = True Test AND
+    c{ SHL, 16h0010, 16h0010},    // Shift A left by 2 bit = 16h0040 Test Shift
+    c{ ROR, 16hBFF0, 16h0004},    // Rotate A right by 4 bits = 16hFF0B Test Rotate
+    c{ RVA, 16hF000, 16h0000},    // Mirror A, ignore B
+    c{ CMPEQ, 16h1001, 16h1001},  // if A = B output 1=true Test Compare equal
+    c{ END, 16b0, 16b0}        
+  });
+    
+  always {
+    vec = TESTSTEP[step];
+  }
+}

@@ -1,0 +1,94 @@
+module disp7seg_top (
+    input clk,  // clock
+    input rst,  // reset
+    input dispmode[5],         // display mode
+    input data16[16],           // binary data
+    output seg [7],            // LED segments
+    output sel [4]             // Digit select
+  ) {
+
+//  const SEGC_0  = 5d0;
+//  const SEGC_1  = 5d1;
+//  const SEGC_2  = 5d2;
+//  const SEGC_3  = 5d3;
+//  const SEGC_4  = 5d4;
+//  const SEGC_5  = 5d5;
+//  const SEGC_6  = 5d6;
+//  const SEGC_7  = 5d7;
+//  const SEGC_8  = 5d8;
+//  const SEGC_9  = 5d9;
+  const SEGC_A  = 5d10;
+  const SEGC_B_ = 5d11;
+  const SEGC_C  = 5d12;
+  const SEGC_D_ = 5d13;
+  const SEGC_E  = 5d14;
+  const SEGC_F  = 5d15;
+  const SEGC_O  = 5d0;
+  const SEGC_I  = 5d1;
+  const SEGC_S  = 5d5;
+//  const SEGC_G_ = 5d9;
+  const SEGC_BK = 5d16;
+  const SEGC_O_ = 5d17;
+  const SEGC_C_ = 5d18;
+  const SEGC_U_ = 5d19;
+  const SEGC_N_ = 5d20;
+  const SEGC_R_ = 5d21;
+  const SEGC_Q_ = 5d22;
+//  const SEGC_DASH = 5d23;
+  const SEGC_P  = 5d24;
+//  const SEGC_H  = 5d25;
+  const SEGC_X  = 5d25;
+  const SEGC_L  = 5d26;
+  const SEGC_H_ = 5d27;
+//  const SEGC_Y  = 5d28;
+  const SEGC_Y_ = 5d28;
+  const SEGC_T_ = 5d29;
+  const SEGC_A_ = 5d30;
+  const SEGC__  = 5d31;
+  
+  
+  
+  disp7seg disp7seg (.clk(clk), .rst(rst));
+  
+  always {
+    disp7seg.digits = 4x{{SEGC_BK}};
+    
+    seg = disp7seg.seg;
+    sel = disp7seg.sel;
+    
+    case (dispmode) {
+      0:  disp7seg.digits = {SEGC_A, SEGC_D_, SEGC_D_, SEGC_BK};     //Add
+      1:  disp7seg.digits = {SEGC_S, SEGC_U_, SEGC_B_, SEGC_BK};     //Sub
+      2:  disp7seg.digits = {SEGC_A_, SEGC_X, SEGC_B_, SEGC_BK};     //aXb   
+      3:  disp7seg.digits = {SEGC_A, SEGC_N_, SEGC_D_, SEGC_BK};     //And
+      4:  disp7seg.digits = {SEGC_O, SEGC_R_, SEGC_BK, SEGC_BK};     //Or
+      5:  disp7seg.digits = {SEGC_X, SEGC_O_, SEGC_R_, SEGC_BK};     //Xor
+      6:  disp7seg.digits = {SEGC__, SEGC_A, SEGC__, SEGC_BK};       //_A_
+      7:  disp7seg.digits = {SEGC__, SEGC_B_, SEGC__, SEGC_BK};      //_b_
+      8:  disp7seg.digits = {SEGC_B_, SEGC_C_, SEGC_A_, SEGC_BK};    //bca
+      9:  disp7seg.digits = {SEGC_A_, SEGC_C_, SEGC_B_, SEGC_BK};    //acb
+      10: disp7seg.digits = {SEGC_S, SEGC_H_, SEGC_L, SEGC_BK};      //ShL
+      11: disp7seg.digits = {SEGC_S, SEGC_H_, SEGC_R_, SEGC_BK};     //Shr
+      12: disp7seg.digits = {SEGC_S, SEGC_R_, SEGC_A, SEGC_BK};      //SrA
+      13: disp7seg.digits = {SEGC_R_, SEGC_O_, SEGC_L, SEGC_BK};     //roL
+      14: disp7seg.digits = {SEGC_R_, SEGC_O_, SEGC_R_, SEGC_BK};    //ror
+      15: disp7seg.digits = {SEGC_R_, SEGC_A, SEGC_BK, SEGC_BK};     //rA
+      16: disp7seg.digits = {SEGC_C, SEGC_E, SEGC_Q_, SEGC_BK};      //CEq
+      17: disp7seg.digits = {SEGC_C, SEGC_L, SEGC_T_, SEGC_BK};      //CLt
+      18: disp7seg.digits = {SEGC_C, SEGC_L, SEGC_E, SEGC_BK};       //CLE
+      27: disp7seg.digits = {SEGC_E, SEGC_R_, SEGC_R_, SEGC_BK};     //Err
+      28: disp7seg.digits = {SEGC_P, SEGC_A, SEGC_S, SEGC_S};        //PASS
+      29: disp7seg.digits = {SEGC_F, SEGC_A, SEGC_I, SEGC_L};        //FAIL
+      30: disp7seg.digits = {SEGC_R_, SEGC_D_, SEGC_Y_, SEGC_BK};    //rdy
+      31: 
+        disp7seg.digits = {        //display data16
+          c{1b0,data16[15:12]}, 
+          c{1b0,data16[11:8]},
+          c{1b0,data16[7:4]},
+          c{1b0,data16[3:0]}
+        };
+      default:
+        disp7seg.digits = {SEGC_BK, SEGC_BK, SEGC_BK, SEGC_BK};
+    }
+  }
+}

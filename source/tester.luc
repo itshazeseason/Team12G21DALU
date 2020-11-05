@@ -1,0 +1,233 @@
+module tester (
+    input clk,  // clock
+    input rst,  // reset
+    input trigA,            // trigger input
+    input trigB,            // trigger input
+    input trigSel,          // trigger input
+    input trigExe,          // trigger input
+    input trigTest,         // trigger input
+    input  dipsw[16],       // supply 16bit data input
+    output led[16],         // display 16bit data in binary
+    output led_alufn[6],    // display alufn in binary 
+    output seg[7],          //7segLED segments
+    output sel[4],          //7segLED sel
+    output alu_a[16],       //ALU A input 
+    output alu_b[16],       //ALU B input 
+    output alu_fn[6],       //ALUFN input
+    input  alu_result[16],  //ALU result
+    input  alu_check[16]    //reference ALU result for selftest
+
+//    input testresult[16]    //16bit result from multiplier
+  ) {
+
+  sig alufn[6];
+  sig tick;
+  sig vec[38];
+  sig result;
+  
+  //alumode look-up table
+  const ALUFN = $reverse({
+    6b000000,      //ADD
+    6b000001,      //SUB
+    6b000010,      //MUL
+    6b011000,      //AND
+    6b011110,      //OR
+    6b010110,      //XOR
+    6b011010,      //'A'
+    6b011100,      //'B'
+    6b010010,      //A & ~B
+    6b010100,      //B & ~A
+    6b100000,      //SHL
+    6b100001,      //SHR
+    6b100011,      //SRA
+    6b100100,      //ROL
+    6b100101,      //ROR
+    6b100111,      //FLIPA
+    6b110011,      //CMPEQ
+    6b110101,      //CMPLT
+    6b110111       //CMPLE
+  });
+    
+  disp7seg_top disp(.clk(clk), .rst(rst));
+  testtbl ttbl;
+  
+  dff dff_a[16](.clk(clk), .rst(rst));      //dff to hold alu inpu
+  dff dff_b[16](.clk(clk), .rst(rst));      //dff to hold alu input
+  dff dff_alumode[5](.clk(clk), .rst(rst));
+  dff dff_testfn[6](.clk(clk), .rst(rst));  //dff to hold test alufn
+  dff dff_run (#INIT(0), .clk(clk), .rst(rst));              //hold tickctr rst
+  counter tickctr(#SIZE(1), #DIV(26), .clk(clk));            // CLk 
+  edge_detector edge_tick (#RISE(1), #FALL(0), .clk(clk)) ;
+  dff stepctr[8](#INIT(0), .clk(clk), .rst(rst));           //hold test step
+  
+  fsm ledSel(.clk(clk), .rst(rst)) = {SELA, SELB, SELALU}; 
+  fsm dataSel(.clk(clk), .rst(rst)) = {SELA, SELB, SELALU, SELTEST}; 
+  fsm dispSel(.clk(clk), .rst(rst)) = {RDY, DATA, PASS, FAIL, ALUMODE, ERR}; 
+  
+  fsm state(.clk(clk), .rst(rst)) = {RDY, LDA, LDB, FNSEL, EXE, RUN, CHECK};  
+  
+  always {
+//    alufn = ALUFN[dff_alumode.q]; 
+    vec = ttbl.vec;
+    result = ~|( alu_check ^ alu_result );      //generate comparison result with xor, 1 = same
+  
+    //alufn
+    alufn = 6b0;
+    case (dataSel.q) {
+      dataSel.SELTEST: alufn = dff_testfn.q;
+      default: alufn = ALUFN[dff_alumode.q]; 
+    }
+    
+    //seg and sel
+    seg = disp.seg;
+    sel = disp.sel;
+    
+    //led
+    led = 16b0;
+    case (ledSel.q) {
+      ledSel.SELA: led = dff_a.q;
+      ledSel.SELB: led = dff_b.q;
+      ledSel.SELALU: led = alu_result;
+    }
+    
+    //led_alufn
+    led_alufn = alufn; 
+
+    //disp.data16
+    disp.data16 = 16b0;
+    case (dataSel.q) {
+      dataSel.SELA: disp.data16 = dff_a.q;
+      dataSel.SELB: disp.data16 = dff_b.q;
+      dataSel.SELALU: disp.data16 = alu_result;
+      dataSel.SELTEST: disp.data16 = stepctr.q;
+    }
+    
+    //disp.dispmode
+    disp.dispmode = 5b0;
+    case (dispSel.q) {
+      dispSel.RDY: disp.dispmode = 5d30;
+      dispSel.DATA: disp.dispmode = 5d31;
+      dispSel.PASS: disp.dispmode = 5d28;
+      dispSel.FAIL: disp.dispmode = 5d29;
+      dispSel.ALUMODE: disp.dispmode = dff_alumode.q;
+      dispSel.ERR: disp.dispmode = 5d27;
+    }
+    
+    //alu connection
+    alu_a = dff_a.q;
+    alu_b = dff_b.q;
+    alu_fn = alufn;
+    
+    //tick, tickctr
+    tickctr.rst = ~dff_run.q;      //keep counter in reset
+    edge_tick.in = tickctr.value;
+    tick = edge_tick.out;
+
+    //ttbl
+    ttbl.step = stepctr.q;
+    
+    //DFFs and FSMs
+    dff_a.d = dff_a.q;
+    dff_b.d = dff_b.q;
+    dff_alumode.d = dff_alumode.q;
+    dff_testfn.d = dff_testfn.q;
+    dff_run.d = dff_run.q;
+    stepctr.d = stepctr.q;
+    ledSel.d = ledSel.q;
+    dataSel.d = dataSel.q;
+    dispSel.d = dispSel.q;
+    state.d = state.q;
+    
+    //State machine logics
+    if (dff_run.q) {  //in selftest mode, check for tick
+      if (tick) {
+        case (state.q) {
+          state.RUN:
+            if (vec[37:32] == 6h3F) {  // END
+              dff_run.d = 0;      //stop selftest
+              state.d = state.RDY;      //revert to standby
+              dispSel.d = dispSel.PASS;    //show PASS
+            } else {
+              state.d = state.CHECK;
+              dff_a.d = vec[31:16];        //load test vector 
+              dff_b.d = vec[15:0];
+              dff_testfn.d = vec[37:32];
+            }
+          state.CHECK:
+            if (result) {      //result is good
+              stepctr.d = stepctr.q + 1;   //next step
+              state.d = state.RUN;
+            } else {
+              dff_run.d = 0;
+              state.d = state.RDY;  
+            }
+          default:
+            dff_run.d = 0;      //stop selftest
+            state.d = state.RDY;      //revert to rdy
+            ledSel.d = ledSel.SELA;
+            dataSel.d = dataSel.SELA;
+            dispSel.d = dispSel.ERR;
+        }
+      }
+    } else {    //if not in Selftest running state, check for trigger input
+      if (trigA) {
+        if (state.q == state.LDA) {
+          dff_a.d = dipsw;           // Store dip switch value into A
+          ledSel.d = ledSel.SELA;
+          dataSel.d = dataSel.SELA;
+          dispSel.d = dispSel.DATA;
+        } else {        
+          state.d = state.LDA;
+          ledSel.d = ledSel.SELA;    // LED Show value of A
+          dataSel.d = dataSel.SELA;  // 7Seg show hex value of A
+          dispSel.d = dispSel.DATA;  // 7Seg show hex value
+        }
+      } else if (trigB) {
+        if (state.q == state.LDB) {
+          dff_b.d = dipsw;
+          ledSel.d = ledSel.SELB;
+          dataSel.d = dataSel.SELB;
+          dispSel.d = dispSel.DATA;
+        } else {        
+          state.d = state.LDB;
+          ledSel.d = ledSel.SELB;
+          dataSel.d = dataSel.SELB;
+          dispSel.d = dispSel.DATA;
+        }
+      } else if (trigSel) {
+        if (state.q == state.FNSEL) {
+          // Cycle through 19 ALUFN functions
+          if (dff_alumode.q == 5d18) {
+            dff_alumode.d = 0;  
+          } else {
+            dff_alumode.d = dff_alumode.q + 1;   
+          }
+          dispSel.d = dispSel.ALUMODE;
+        } else {        
+          state.d = state.FNSEL;
+          dispSel.d = dispSel.ALUMODE;
+        }
+      } else if (trigExe) {
+        if (state.q == state.EXE) {
+          dff_a.d = alu_result;     // store result to A
+          ledSel.d = ledSel.SELALU;
+          dataSel.d = dataSel.SELALU;
+          dispSel.d = dispSel.DATA;
+        } else {        
+          state.d = state.EXE;
+          ledSel.d = ledSel.SELALU;
+          dataSel.d = dataSel.SELALU;
+          dispSel.d = dispSel.DATA;
+        }
+      } else if (trigTest) {    //start selftest
+          state.d = state.RUN;
+          dff_run.d = 1;        //start tick counter
+          ledSel.d = ledSel.SELALU;
+          dataSel.d = dataSel.SELTEST;
+          dispSel.d = dispSel.DATA;
+          stepctr.d = 1;        //start from step 1
+      
+      }
+    }
+  }
+}

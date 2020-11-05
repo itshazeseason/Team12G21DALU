@@ -1,0 +1,402 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Nov  6 03:44:54 2020
+# Process ID: 37500
+# Current directory: C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.runs/synth_1
+# Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
+# Log file: C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.runs/synth_1/au_top_0.vds
+# Journal file: C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source au_top_0.tcl -notrace
+Command: synth_design -top au_top_0 -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 35740
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'au_top_0' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/au_top_0.v:7]
+INFO: [Synth 8-6157] synthesizing module 'button_conditioner_2' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/button_conditioner_2.v:13]
+	Parameter CLK_FREQ bound to: 26'b10111110101111000010000000 
+	Parameter MIN_DELAY bound to: 5'b10100 
+	Parameter NUM_SYNC bound to: 2'b10 
+INFO: [Synth 8-6157] synthesizing module 'pipeline_6' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/pipeline_6.v:11]
+	Parameter DEPTH bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_6' (1#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/pipeline_6.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'button_conditioner_2' (2#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/button_conditioner_2.v:13]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector_3' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/edge_detector_3.v:12]
+	Parameter RISE bound to: 1'b1 
+	Parameter FALL bound to: 1'b0 
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector_3' (3#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/edge_detector_3.v:12]
+INFO: [Synth 8-6157] synthesizing module 'reset_conditioner_1' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/reset_conditioner_1.v:11]
+	Parameter STAGES bound to: 3'b100 
+INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner_1' (4#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/reset_conditioner_1.v:11]
+INFO: [Synth 8-6157] synthesizing module 'tester_4' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/tester_4.v:7]
+	Parameter ALUFN bound to: 114'b110111110101110011100111100101100100100011100001100000010100010010011100011010010110011110011000000010000001000000 
+	Parameter SELA_ledSel bound to: 2'b00 
+	Parameter SELB_ledSel bound to: 2'b01 
+	Parameter SELALU_ledSel bound to: 2'b10 
+	Parameter SELA_dataSel bound to: 2'b00 
+	Parameter SELB_dataSel bound to: 2'b01 
+	Parameter SELALU_dataSel bound to: 2'b10 
+	Parameter SELTEST_dataSel bound to: 2'b11 
+	Parameter RDY_dispSel bound to: 3'b000 
+	Parameter DATA_dispSel bound to: 3'b001 
+	Parameter PASS_dispSel bound to: 3'b010 
+	Parameter FAIL_dispSel bound to: 3'b011 
+	Parameter ALUMODE_dispSel bound to: 3'b100 
+	Parameter ERR_dispSel bound to: 3'b101 
+	Parameter RDY_state bound to: 3'b000 
+	Parameter LDA_state bound to: 3'b001 
+	Parameter LDB_state bound to: 3'b010 
+	Parameter FNSEL_state bound to: 3'b011 
+	Parameter EXE_state bound to: 3'b100 
+	Parameter RUN_state bound to: 3'b101 
+	Parameter CHECK_state bound to: 3'b110 
+INFO: [Synth 8-6157] synthesizing module 'disp7seg_top_7' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/disp7seg_top_7.v:7]
+	Parameter SEGC_A bound to: 5'b01010 
+	Parameter SEGC_B_ bound to: 5'b01011 
+	Parameter SEGC_C bound to: 5'b01100 
+	Parameter SEGC_D_ bound to: 5'b01101 
+	Parameter SEGC_E bound to: 5'b01110 
+	Parameter SEGC_F bound to: 5'b01111 
+	Parameter SEGC_O bound to: 5'b00000 
+	Parameter SEGC_I bound to: 5'b00001 
+	Parameter SEGC_S bound to: 5'b00101 
+	Parameter SEGC_BK bound to: 5'b10000 
+	Parameter SEGC_O_ bound to: 5'b10001 
+	Parameter SEGC_C_ bound to: 5'b10010 
+	Parameter SEGC_U_ bound to: 5'b10011 
+	Parameter SEGC_N_ bound to: 5'b10100 
+	Parameter SEGC_R_ bound to: 5'b10101 
+	Parameter SEGC_Q_ bound to: 5'b10110 
+	Parameter SEGC_P bound to: 5'b11000 
+	Parameter SEGC_X bound to: 5'b11001 
+	Parameter SEGC_L bound to: 5'b11010 
+	Parameter SEGC_H_ bound to: 5'b11011 
+	Parameter SEGC_Y_ bound to: 5'b11100 
+	Parameter SEGC_T_ bound to: 5'b11101 
+	Parameter SEGC_A_ bound to: 5'b11110 
+	Parameter SEGC__ bound to: 5'b11111 
+INFO: [Synth 8-6157] synthesizing module 'disp7seg_15' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/disp7seg_15.v:11]
+	Parameter DIV bound to: 5'b10000 
+INFO: [Synth 8-6157] synthesizing module 'counter_18' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/counter_18.v:14]
+	Parameter SIZE bound to: 2'b10 
+	Parameter DIV bound to: 5'b10000 
+	Parameter TOP bound to: 2'b11 
+	Parameter UP bound to: 1'b1 
+	Parameter MAX_VALUE bound to: 18'b111111111111111111 
+INFO: [Synth 8-6155] done synthesizing module 'counter_18' (5#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/counter_18.v:14]
+INFO: [Synth 8-6157] synthesizing module 'decoder_19' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/decoder_19.v:11]
+	Parameter WIDTH bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'decoder_19' (6#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/decoder_19.v:11]
+INFO: [Synth 8-226] default block is never used [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/disp7seg_15.v:41]
+INFO: [Synth 8-6155] done synthesizing module 'disp7seg_15' (7#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/disp7seg_15.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'disp7seg_top_7' (8#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/disp7seg_top_7.v:7]
+INFO: [Synth 8-6157] synthesizing module 'testtbl_8' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/testtbl_8.v:7]
+	Parameter ADD bound to: 6'b000000 
+	Parameter SUB bound to: 6'b000001 
+	Parameter MUL bound to: 6'b000010 
+	Parameter AND bound to: 6'b011000 
+	Parameter OR bound to: 6'b011110 
+	Parameter XOR bound to: 6'b010110 
+	Parameter A_ bound to: 6'b011010 
+	Parameter B_ bound to: 6'b011100 
+	Parameter BCA bound to: 6'b010010 
+	Parameter ACB bound to: 6'b010100 
+	Parameter SHL bound to: 6'b100000 
+	Parameter SHR bound to: 6'b100001 
+	Parameter SRA bound to: 6'b100011 
+	Parameter ROL bound to: 6'b100100 
+	Parameter ROR bound to: 6'b100101 
+	Parameter RVA bound to: 6'b100111 
+	Parameter CMPEQ bound to: 6'b110011 
+	Parameter CMPLT bound to: 6'b110101 
+	Parameter CMPLE bound to: 6'b110111 
+	Parameter START bound to: 6'b000000 
+	Parameter END bound to: 6'b111111 
+	Parameter TESTSTEP bound to: 494'b11111100000000000000000000000000000000110011000100000000000100010000000000011001111111000000000000000000000000000010010110111111111100000000000000000100100000000000000001000000000000000100000110000000000100000001000000010000000100001000001111111111110000000000000010000010000000000001000000000001000000010000011000000000000001000000000000001000000100000000010100000000000000010000000000000011111111111100000000000000100000000000000000000010000000000000101000000000000000000000000000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'testtbl_8' (9#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/testtbl_8.v:7]
+INFO: [Synth 8-6157] synthesizing module 'counter_9' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/counter_9.v:14]
+	Parameter SIZE bound to: 1'b1 
+	Parameter DIV bound to: 5'b11010 
+	Parameter TOP bound to: 1'b0 
+	Parameter UP bound to: 1'b1 
+	Parameter MAX_VALUE bound to: 27'b011111111111111111111111111 
+INFO: [Synth 8-6155] done synthesizing module 'counter_9' (10#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/counter_9.v:14]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/tester_4.v:151]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/tester_4.v:181]
+INFO: [Synth 8-6155] done synthesizing module 'tester_4' (11#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/tester_4.v:7]
+INFO: [Synth 8-6157] synthesizing module 'alu_16_5' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_16_5.v:7]
+INFO: [Synth 8-6157] synthesizing module 'alu_adder_10' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_adder_10.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'alu_adder_10' (12#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_adder_10.v:7]
+INFO: [Synth 8-6157] synthesizing module 'alu_boolean_11' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_boolean_11.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'alu_boolean_11' (13#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_boolean_11.v:7]
+INFO: [Synth 8-6157] synthesizing module 'alu_shifter_12' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_shifter_12.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'alu_shifter_12' (14#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_shifter_12.v:7]
+INFO: [Synth 8-6157] synthesizing module 'alu_compare_13' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_compare_13.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'alu_compare_13' (15#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_compare_13.v:7]
+INFO: [Synth 8-6157] synthesizing module 'mx16x16_14' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/mx16x16_14.v:7]
+INFO: [Synth 8-6157] synthesizing module 'half_adder_16' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/half_adder_16.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'half_adder_16' (16#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/half_adder_16.v:7]
+INFO: [Synth 8-6157] synthesizing module 'full_adder_17' [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/full_adder_17.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder_17' (17#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/full_adder_17.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'mx16x16_14' (18#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/mx16x16_14.v:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_16_5.v:100]
+INFO: [Synth 8-6155] done synthesizing module 'alu_16_5' (19#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/alu_16_5.v:7]
+INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (20#1) [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.srcs/sources_1/imports/verilog/au_top_0.v:7]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 1012.734 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/alchitry.xdc]
+Finished Parsing XDC File [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/alchitry.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/alchitry.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/au_top_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/au_top_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/io.xdc]
+Finished Parsing XDC File [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/io.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/constraint/io.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/au_top_0_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/au_top_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
+Finished Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1012.734 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tftg256-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   18 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 1     
++---XORs : 
+	   2 Input     16 Bit         XORs := 2     
+	   2 Input      1 Bit         XORs := 17    
+	   3 Input      1 Bit         XORs := 105   
++---Registers : 
+	               18 Bit    Registers := 1     
+	               16 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 7     
+	                1 Bit    Registers := 7     
++---Muxes : 
+	   2 Input   18 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 32    
+	   4 Input   16 Bit        Muxes := 4     
+	   8 Input   16 Bit        Muxes := 1     
+	   8 Input    8 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   4 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 2     
+	   7 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 2     
+	   4 Input    3 Bit        Muxes := 1     
+	   5 Input    3 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 1     
+	   5 Input    2 Bit        Muxes := 1     
+	   6 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 15    
+	   3 Input    1 Bit        Muxes := 8     
+	   5 Input    1 Bit        Muxes := 1     
+	   4 Input    1 Bit        Muxes := 1     
+	   7 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping	Report
++------------+-------------------+---------------+----------------+
+|Module Name | RTL Object        | Depth x Width | Implemented As | 
++------------+-------------------+---------------+----------------+
+|disp7seg_15 | seg               | 32x7          | LUT            | 
+|tester_4    | disp/disp7seg/seg | 32x7          | LUT            | 
++------------+-------------------+---------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 1012.734 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:47 ; elapsed = 00:00:49 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    45|
+|3     |LUT1   |    23|
+|4     |LUT2   |   119|
+|5     |LUT3   |    54|
+|6     |LUT4   |   142|
+|7     |LUT5   |   146|
+|8     |LUT6   |   357|
+|9     |MUXF7  |     5|
+|10    |FDRE   |   223|
+|11    |FDSE   |     4|
+|12    |IBUF   |    25|
+|13    |OBUF   |    45|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:44 ; elapsed = 00:00:51 . Memory (MB): peak = 1169.719 ; gain = 156.984
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:00:53 . Memory (MB): peak = 1169.719 ; gain = 156.984
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 1169.719 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 50 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1169.719 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+60 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:57 ; elapsed = 00:01:01 . Memory (MB): peak = 1169.719 ; gain = 156.984
+INFO: [Common 17-1381] The checkpoint 'C:/Users/hhzhe/Documents/alchitry/ALUfinal/work/vivado/ALUfinal/ALUfinal.runs/synth_1/au_top_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Nov  6 03:45:58 2020...
