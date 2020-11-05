@@ -3,6 +3,7 @@
  1D ALU using alchitry FPGA ISTD team 12 group 2
 
 16 bit ALU coded for Alchitry Au FPGA
+
 **Au_top**: connects the external inputs (the dipswitch and buttons) to the internal submodule circuits (the ALU and its subcomponents) and displays the output of the ALU using the 7 segments and leds. 
 Has an additional function to force the MSB of our internal ALU results to be 1 to show our circuit can check for errors.
 
